@@ -14,9 +14,8 @@ import org.hibernate.annotations.ForeignKey;
 
 @Entity
 @Table(name="tipoendereco")
-
-public class TipoEndereco implements Serializable{
-
+public class TipoEndereco implements Serializable {
+    
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -33,14 +32,6 @@ public class TipoEndereco implements Serializable{
     public TipoEndereco() {
     }
 
-    public Integer getIdTipoEndereco() {
-        return idTipoEndereco;
-    }
-
-    public void setIdTipoEndereco(Integer idTipoEndereco) {
-        this.idTipoEndereco = idTipoEndereco;
-    }
-
     public String getDescricaoTipoEndereco() {
         return descricaoTipoEndereco;
     }
@@ -49,11 +40,20 @@ public class TipoEndereco implements Serializable{
         this.descricaoTipoEndereco = descricaoTipoEndereco;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + (this.idTipoEndereco != null ? this.idTipoEndereco.hashCode() : 0);
-        return hash;
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
+
+    public Integer getIdTipoEndereco() {
+        return idTipoEndereco;
+    }
+
+    public void setIdTipoEndereco(Integer idTipoEndereco) {
+        this.idTipoEndereco = idTipoEndereco;
     }
 
     @Override
@@ -70,8 +70,11 @@ public class TipoEndereco implements Serializable{
         }
         return true;
     }
-    
-    
-    
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + (this.idTipoEndereco != null ? this.idTipoEndereco.hashCode() : 0);
+        return hash;
+    }
 }

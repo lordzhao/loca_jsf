@@ -6,31 +6,30 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.ForeignKey;
 
-    @Entity
-    @Table (name = "cidade")
-    
+@Entity
+@Table(name="cidade")
 public class Cidade implements Serializable{
     
-    private static final long SerialVersionUID = 1L;
+    private static final long serialVersionUID =  1L; 
     
     @Id
     @GeneratedValue
-    @Column (name = "IdCidade", nullable = false)
+    @Column(name="IdCidade", nullable=false)
     private Integer idCidade;
-    @Column (name = "Nome",nullable = false, length = 80)
+    @Column(name="Nome", length=80, nullable=false)
     private String nome;
-    
-    //RELACIONAMENTOS
-    @OneToMany()
-    @ForeignKey(name = "CidadeEndereco")
-    private List<Endereco> enderecos;
 
+    @OneToMany(mappedBy = "cidade", fetch = FetchType.LAZY)
+    @ForeignKey(name="EnderecoCidade")
+    private List<Endereco> enderecos;
+    
     public Cidade() {
     }
 
@@ -50,10 +49,18 @@ public class Cidade implements Serializable{
         this.nome = nome;
     }
 
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + (this.idCidade != null ? this.idCidade.hashCode() : 0);
+        hash = 89 * hash + (this.idCidade != null ? this.idCidade.hashCode() : 0);
         return hash;
     }
 
@@ -71,7 +78,5 @@ public class Cidade implements Serializable{
         }
         return true;
     }
-    
-    
     
 }

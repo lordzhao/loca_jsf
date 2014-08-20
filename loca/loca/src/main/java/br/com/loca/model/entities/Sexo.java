@@ -14,31 +14,21 @@ import javax.persistence.Table;
 import org.hibernate.annotations.ForeignKey;
 
 @Entity
-@Table(name = "sexo")
-
-public class Sexo implements Serializable{
-
-    private static final long SerialVersionUID = 1L;
+@Table(name="sexo")
+public class Sexo implements Serializable {
+    
+    private static final long serialVersionUID =  1L;   
     
     @Id
     @GeneratedValue
-    @Column (name = "IdSexo", nullable = false)
+    @Column(name="IdSexo",nullable=false)
     private Integer idSexo;
-    @Column (name = "Descricao",unique = true, nullable = false, length = 9)
+    @Column(name="Descricao", unique=true, nullable=false, length=9)
     private String descricao;
 
     @OneToMany(mappedBy = "sexo", fetch = FetchType.LAZY)
-    @ForeignKey (name = "PessoaSexo")
+    @ForeignKey(name = "PessoaSexo")        
     private List<Pessoa> pessoas;
-
-    public List<Pessoa> getPessoas() {
-        return pessoas;
-    }
-
-    public void setPessoas(List<Pessoa> pessoas) {
-        this.pessoas = pessoas;
-    }
-    
     
     public Sexo() {
     }
@@ -59,10 +49,18 @@ public class Sexo implements Serializable{
         this.descricao = descricao;
     }
 
+    public List<Pessoa> getPessoas() {
+        return pessoas;
+    }
+
+    public void setPessoas(List<Pessoa> pessoas) {
+        this.pessoas = pessoas;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 71 * hash + (this.idSexo != null ? this.idSexo.hashCode() : 0);
+        hash = 97 * hash + (this.idSexo != null ? this.idSexo.hashCode() : 0);
         return hash;
     }
 
@@ -80,6 +78,5 @@ public class Sexo implements Serializable{
         }
         return true;
     }
-    
     
 }
